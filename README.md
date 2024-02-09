@@ -1,4 +1,5 @@
 ALZHEIMER
+
 In the first part of the code, instructions are provided regarding the file locations. The genetic information provided by ADNI will be utilized, including ADNI1 GWAS, ADNI WGS+omni, ADNI GO/2 GWAS (both datasets), and ADNI3 GWAS (both datasets). Additionally, information will be provided on reference datasets to download and how to manipulate them to make them most usable for the analysis.
 - all_phase3.pgen.zst
 - all_phase3.pvar.zst
