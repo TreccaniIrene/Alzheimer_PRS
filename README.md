@@ -10,6 +10,7 @@ In the first part of the code, instructions are provided regarding the file loca
 - ADNIMERGE.csv
 - AD_sumstats_Jansenetal_2019sept.txt.gz
 
+
 QUALITY CONTROL
 
 For each ADNI dataset, the following analyses are performed: 
@@ -19,6 +20,7 @@ For each ADNI dataset, the following analyses are performed:
 4) The .vcf file is subsequently analyzed using bcftools sort, bcftools index, 
 bcftools plugin using as a reference file riferimento All_20180423.vcf.gz and Homo_sapiens.GRCh37.dna.primary_assembly.fa.gz, again bcftools sort, and bcftools index to perform bcftools norm --check-ref. 
 5) The resulting .vcf.gz file is finally split into 22 files, one for each chromosome.
+
 
 IMPUTATION
 
@@ -32,6 +34,7 @@ For this process, the Michigan Imputation Server was used with the following fil
 - Population: EUR 
 - Mode: Quality Control & Imputation
 
+
 POST IMPUTATION
 
 The Michigan Imputation Server returns a .zip file for each chromosome uploaded, which needs to be opened using the password sent via email by the platform. 
@@ -44,6 +47,7 @@ Following that, several post-imputation quality control steps are performed. In 
 6) a questo punto tutti i dataset di ADNI vengono uniti e successivamente viene fatto un --recover-var-ids force partial utilizzando come riferimento il file 00-All.vcf.gz. 
 7) infine vengono fatti ulteriori filtri QC sul file finale utilizzando  --maf 0.05 e --geno 0.1
 
+
 POPULATION ANCESTRY
 
 1) To perform the analysis, we followed the guidelines outlined in the following link: https://cran.r-project.org/web/packages/plinkQC/vignettes/AncestryCheck.pdf. The file is then manipulated to make it consistent with all_phase3. The two files are merged.
@@ -53,6 +57,7 @@ Subsequently, individuals not belonging to the European population are excluded.
 4) PerformLD-pruning with --indep-pairwise 1000 50 0.1 
 5) Remove the subjects with relatedness > 0.1
 
+
 PRSice-2
 
 1) pheno_covariate.R : This R script reads a .fam file and extracts FID, RID, SEX columns. It also reads a PCA.eigenvec file to extract principal components (PCs) and merge them with the covariate information and then save as "covariate.txt" with the first six columns. Additionally, the script creates a new phenotype file by extracting specific columns from the .fam file and saves it as "recodedpheno.txt".
@@ -60,6 +65,7 @@ PRSice-2
 3) In PRSice-2, the files previously obtained are inputted pheno_covariate.R e Base_file.R ( --cov, --pheno ), --base. In addition, the commands are specified --clump-kb 1000, --clump-r2 0.1, --target and --all-score.
 4) PRSice.plot.R : This script performs an analysis of polygenic scores (PRS) using PRSice-2 output files and recoded phenotype data. It generates density plots for PRS1, PRS2, and the best PRS, distinguishing between healthy and diseased individuals. 
 PRS1 is referred to PRS at Pt 0.01, while PRS2 is referred to PRS at Pt 0.5 extrapolated from .all.score. The resulting plots are saved as PNG files for further examination.
+
 
 PRS PERFORMED IN PLINK
 
