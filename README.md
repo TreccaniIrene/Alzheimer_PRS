@@ -11,6 +11,7 @@ In the first part of the code, instructions are provided regarding the file loca
 - AD_sumstats_Jansenetal_2019sept.txt.gz
 
 QUALITY CONTROL
+
 For each ADNI dataset, the following analyses are performed: 
 1) upload_pheno_AD.R : This script merges two input files (ADNIMERGE.csv and .fam file), identifies rows with Alzheimer's Disease status ("AD", "LMCI", and "EMCI"), checks for sample IDs in both files, updates phenotypes accordingly, and renames the RID column.
 2) sex_missing.R : This R script performs quality checks on genetic data using PLINK outputs (--check-sex, --missing). It checks for sample sex consistency and the proportion of missing genotypes. Valid samples are identified and saved separately for further analysis.
@@ -20,6 +21,7 @@ bcftools plugin using as a reference file riferimento All_20180423.vcf.gz and Ho
 5) The resulting .vcf.gz file is finally split into 22 files, one for each chromosome.
 
 IMPUTATION
+
 For this process, the Michigan Imputation Server was used with the following files: 
 - Select: Run -> Genotype Imputation (Minimac4) 
 - Reference Panel: 1000G Phase 1 v5 
@@ -31,6 +33,7 @@ For this process, the Michigan Imputation Server was used with the following fil
 - Mode: Quality Control & Imputation
 
 POST IMPUTATION
+
 The Michigan Imputation Server returns a .zip file for each chromosome uploaded, which needs to be opened using the password sent via email by the platform. 
 Following that, several post-imputation quality control steps are performed. In particular:
 1) Extract the INFO metric from the VCF file for all variants. Generate a list of variants with an INFO metric less than 0.3. Utilize VCFtools to exclude those variants based on their position.
@@ -42,6 +45,7 @@ Following that, several post-imputation quality control steps are performed. In 
 7) infine vengono fatti ulteriori filtri QC sul file finale utilizzando  --maf 0.05 e --geno 0.1
 
 POPULATION ANCESTRY
+
 1) To perform the analysis, we followed the guidelines outlined in the following link: https://cran.r-project.org/web/packages/plinkQC/vignettes/AncestryCheck.pdf. The file is then manipulated to make it consistent with all_phase3. The two files are merged.
 2) The resulting PCA is used in the R function present in the file evaluate_check_ancestry.R : It computes the maximum Euclidean distance (maxDist) of the European reference samples from this centre. All study samples whose Euclidean distance from the centre falls outside the circle described by the radius  r=europeanTh* maxDist are considered non-European and their IDs are returned as failing the ancestry check.
 Subsequently, individuals not belonging to the European population are excluded.
@@ -50,6 +54,7 @@ Subsequently, individuals not belonging to the European population are excluded.
 5) Remove the subjects with relatedness > 0.1
 
 PRSice-2
+
 1) pheno_covariate.R : This R script reads a .fam file and extracts FID, RID, SEX columns. It also reads a PCA.eigenvec file to extract principal components (PCs) and merge them with the covariate information and then save as "covariate.txt" with the first six columns. Additionally, the script creates a new phenotype file by extracting specific columns from the .fam file and saves it as "recodedpheno.txt".
 2) Base_file.R : This script reads a file named used as base file in PRSice-2, filters out data within a specific range of base pair values on chromosome 19, adds information for two SNPs related to APOE-e4 and APOE-e2, and saves the processed data into multiple output files.
 3) In PRSice-2, the files previously obtained are inputted pheno_covariate.R e Base_file.R ( --cov, --pheno ), --base. In addition, the commands are specified --clump-kb 1000, --clump-r2 0.1, --target and --all-score.
@@ -57,6 +62,7 @@ PRSice-2
 PRS1 is referred to PRS at Pt 0.01, while PRS2 is referred to PRS at Pt 0.5 extrapolated from .all.score. The resulting plots are saved as PNG files for further examination.
 
 PRS PERFORMED IN PLINK
+
 The PRS was calculated using PLINK, employing a method described in https://choishingwan.github.io/PRS-Tutorial/plink/ . 
 1) One way of approximately capturing the right level of causal signal is to perform clumping, which removes SNPs in ways that only weakly correlated SNPs are retained but preferentially retaining the SNPs most associated with the phenotype under study. 
 2) From the result, that containing the index SNPs after clumping, we can extract the index SNP ID. 
