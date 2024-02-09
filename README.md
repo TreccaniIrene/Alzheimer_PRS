@@ -44,8 +44,8 @@ Following that, several post-imputation quality control steps are performed. In 
 3) The .vcf files are analyzed using bcftools sort and bcftools index before being merged into a single file with bcftools concat, with the following parameters: (-allow-overlaps, --remove-duplicates).
 4) Conversion to .bim/.bed/.fam format is carried out using PLINK2. Additionally, filters are applied: --double.id, --snps-only, --max-alleles 2, --maf 0.05, --geno 0.1, --hwe 5e-7.
 5) post_imputation_fam.R : It updates the SEX column in the .fam file based on the information from a file .fam got before imputation. Additionally, it modifies the names of RID and FID columns in the .fam file. Samples that are labeled as "Not Hisp/Latino" in ADNIMERGE.csv are removed from the analysis. Phenotypes are updated based on specific criteria from ADNIMERGE.csv, and the .fam file is accordingly modified.
-6) a questo punto tutti i dataset di ADNI vengono uniti e successivamente viene fatto un --recover-var-ids force partial utilizzando come riferimento il file 00-All.vcf.gz. 
-7) infine vengono fatti ulteriori filtri QC sul file finale utilizzando  --maf 0.05 e --geno 0.1
+6) At this stage, all ADNI datasets are merged, followed by a --recover-var-ids force partial using the file 00-All.vcf.gz as a reference. 
+7) Finally, additional QC filters are applied to the final file using --maf 0.05 and --geno 0.1.
 
 
 POPULATION ANCESTRY
