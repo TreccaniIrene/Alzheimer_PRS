@@ -88,8 +88,6 @@ gunzip AD_sumstats_Jansenetal_2019sept.txt.gz
 awk '!seen[$6]++' AD_sumstats_Jansenetal_2019sept.txt > unique_file.txt
 Rscript $pathRcode/Base_file.R $pathCommonFile $current_directory/ADNI/PRS
 
-
-wget https://ftp.ncbi.nlm.nih.gov/snp/organisms/human_9606_b151_GRCh37p13/VCF/00-All.vcf.gz
 wget https://www.well.ox.ac.uk/~wrayner/tools/HRC-1000G-check-bim-v4.3.0.zip
 
 # Some usefull links 
