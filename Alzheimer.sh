@@ -293,7 +293,7 @@ plink --bfile  $pathADNIGO2_2nd/CHR/Clean1list_biallelic --bmerge $pathADNI3_Fin
 plink --bfile  $current_directory/ADNI/file_merge1 --bmerge $current_directory/ADNI/file_merge2 --make-bed --out $current_directory/ADNI/file_merge4
 plink --bfile  $current_directory/ADNI/file_merge4 --bmerge $current_directory/ADNI/file_merge3 --make-bed --out $current_directory/ADNI/file_merge5
 # Recode rsid
-plink2 --bfile $current_directory/ADNI/file_merge5 --recover-var-ids $pathCommonFile/00-All.vcf.gz force partial --make-bed --out $current_directory/ADNI/file_merge6
+plink2 --bfile $current_directory/ADNI/file_merge5 --recover-var-ids $pathCommonFile/All_20180423.vcf.gz force partial --make-bed --out $current_directory/ADNI/file_merge6
 # Perform some QC filers
 plink --bfile $current_directory/ADNI/file_merge6 --maf 0.05 --geno 0.1 --make-bed --out  $current_directory/ADNI/postrecover
 
