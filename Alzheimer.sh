@@ -335,17 +335,15 @@ plink --bfile Target.no_ac_gt_snps --bmerge all.phase3.clean  --make-bed --out T
 # PCA
 plink --bfile Target.merge.all.phase3 --pca 5 --out Target.all.phase3
 
-cd $current_directory/ADNI/PCA
 # Check the ancestry
 Rscript $pathRcode/evaluate_check_ancestry.R $current_directory/ADNI/PCA Target
 
-# Remove the wrong samples
-plink --bfile $current_directory/ADNI/postrecover --remove remove.txt --make-bed --out ADNI.Final 
-plink --bfile ADNI.Final --bmerge all.phase3.clean --make-bed --out temp.merge.all.phase3.clean
-plink --bfile temp.merge.all.phase3.clean --pca --out PCA
-
 # Check the ancestry second modality
 Rscript $pathRcode/PCA-plot.R $current_directory/ADNI/PCA $pathCommonFile PCA
+
+# Remove the wrong samples
+plink --bfile $current_directory/ADNI/postrecover --remove remove.txt --make-bed --out ADNI.Final 
+plink --bfile ADNI.Final --pca --out PCA
 
 # --indep-pairwise takes the same first two parameters as --indep. Its third parameter is a pairwise r2 threshold:
 # at each step, pairs of variants in the current window with squared correlation greater than the threshold are noted,
