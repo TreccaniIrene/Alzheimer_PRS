@@ -251,14 +251,8 @@ for path in "${paths[@]}"; do
                 print $0
             }
         }' ${input_basename}_clean.recode.vcf > ${input_basename}_clean2.recode.vcf
-        cd ..
-    done
 
-    # Sord and index the .vcf files
-    cd $path/CHR
-    for i in {1..22}
-    do
-        cd chr_$i
+      # Sord and index the .vcf files
         bcftools sort ${input_basename}_clean2.recode.vcf |  bgzip -c > ${input_basename}_clean2.recode.vcf.gz
         bcftools index ${input_basename}_clean2.recode.vcf.gz
         cd ..
