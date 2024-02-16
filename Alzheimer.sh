@@ -1,22 +1,5 @@
 #!/bin/bash
 
-current_directory='/data/users/itreccani'
-alias plink=$current_directory/plink/plink
-alias plink2=$current_directory/plink2/plink2
-alias bcftools=$current_directory/bcftools/bcftools
-path_PRSice=$current_directory/PRSice
-pathRcode=$current_directory/Rcode
-pathCommonFile=$current_directory/CommonFile
-pathADNI1=$current_directory/ADNI/ADNI1
-pathADNIGO2=$current_directory/ADNI/ADNIGO_2
-pathADNIomni=$current_directory/ADNI/ADNIomni
-pathADNIGO2_2nd=$current_directory/ADNI/ADNI_GO2_2nd
-pathADNI3=$current_directory/ADNI/ADNI3
-pathADNI3_Final=$current_directory/ADNI/ADNI3_Final
-paths=($pathADNI1 $pathADNIGO2 $pathADNIomni $pathADNIGO2_2nd $pathADNI3_Final $pathADNI3)
-conda activate adniprs
-
-
 #######################################
 # Arguments:
 #   $1: plink reference
