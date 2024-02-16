@@ -62,18 +62,7 @@ plink2 --zst-decompress all_phase3.pvar.zst > all_phase3.pvar
 mv phase3_corrected.psam all_phase3.psam
 plink2 --zst-decompress all_phase3.pgen.zst > all_phase3.pgen
 plink2 --zst-decompress all_phase3.pvar.zst > all_phase3.pvar
-# Looping through each chromosome to process the data 
-for i in {1..22}
-  do
-    plink2 --pfile all_phase3 vzs --memory 7000 --chr ${i} --snps-only just-acgt --max-alleles 2 --rm-dup exclude-mismatch --set-missing-var-ids '@_#_$1_$2' --new-id-max-allele-len 662 --make-bed --out all.phase3.chr${i}
-done 
-# Creating a merge list file containing the paths for each chromosome file
-for i in {1..22}
-  do
-    echo all.phase3.chr$i >> merge.1000genome.txt
-done
-# Merging the chromosome files using PLINK based on the merge list file
-plink --merge-list merge.1000genome.txt --make-bed --out all.phase3
+plink2 --pfile all_phase3 vzs --snps-only just-acgt --max-alleles 2 --set-missing-var-ids '@_#_$1_$2' --make-bed --out all.phase3
 
 
 # GRCh37
