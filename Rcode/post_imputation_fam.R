@@ -11,27 +11,34 @@ if (length(args) > 0) {
     path <- args[1]
     path2 <- args[2]
     filename <- args[3]
-    path3<-args[4]
   } else {
     path <- readline(prompt = "Enter the path to the file fam: ")
     path2 <- readline(prompt = "Enter the path to the file cvs: ")
     filename <- readline(prompt = "Enter the file name: ")
-    path3 <- readline(prompt = "Enter the path to the file TEMP6: ")
   }
 
 # Read the file
 cvs <- read.csv(paste(path2, "/ADNIMERGE.csv", sep = "", collapse = NULL), header=T)
 fam <- read.table(paste(path, "/", filename,".fam", sep = "", collapse = NULL), header=F)
-file <- read.table(paste(path3,"/TEMP6.fam", sep = "", collapse = NULL), header=F)
-# Update the SEX
-fam$V5 <- file$V5
+
 # Change the RID and FID names 
 parti <- strsplit(as.character(fam$V2), "_")
 fam$V2 <- sapply(parti, function(x) paste(x[-1], collapse = "_"))
 fam$V1 <- as.integer(sub("^.*_.*_(\\d+)$", "\\1", fam$V2))
 
+# Merge the file by sampleID
+m <- merge(fam, cvs[,1:13], by.x = c("V2"), by.y=c("PTID"), all.x=T)
+
+# Update Sex
+sex <- row.names(m[ which( m$PTGENDER == "Female"),])
+d <- m[sex,]
+risultato <- fam$V2 %in% d$V2
+fam$V5[risultato] <- 2  # Female
+fam$V5[!risultato] <- 1 #Male
+
 # Remove the Samples that are "Not Hisp/Latino"
-ccc <- cvs[,c("RID","PTID","PTETHCAT")]
+empty <- cvs[which(cvs$DX_bl != ""),]
+ccc <- empty[,c("RID","PTID","PTETHCAT")]
 name<- ccc[which(ccc$PTETHCAT!="Not Hisp/Latino"),]
 array1 <- fam$V1
 uni <- unique(name)
