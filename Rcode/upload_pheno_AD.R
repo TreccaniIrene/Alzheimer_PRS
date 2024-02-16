@@ -33,7 +33,7 @@ fam$V1 <- as.integer(sub("^.*_.*_(\\d+)$", "\\1", fam$V2))
 
 # Update Sex
 sex <- row.names(m[ which( m$PTGENDER == "Female"),])
-d <- m[name,]
+d <- m[sex,]
 risultato <- fam$V2 %in% d$V2
 fam$V5[risultato] <- 2  # Female
 fam$V5[!risultato] <- 1 #Male
