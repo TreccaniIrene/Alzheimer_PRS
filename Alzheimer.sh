@@ -62,7 +62,7 @@ plink2 --zst-decompress all_phase3.pvar.zst > all_phase3.pvar
 mv phase3_corrected.psam all_phase3.psam
 plink2 --zst-decompress all_phase3.pgen.zst > all_phase3.pgen
 plink2 --zst-decompress all_phase3.pvar.zst > all_phase3.pvar
-plink2 --pfile all_phase3 vzs --snps-only just-acgt --max-alleles 2 --set-missing-var-ids '@_#_$1_$2' --make-bed --out all.phase3
+plink2 --pfile all_phase3 vzs --snps-only just-acgt --max-alleles 2 --rm-dup exclude-mismatch --set-missing-var-ids '@_#_$1_$2' --make-bed --out all.phase3
 
 
 # GRCh37
